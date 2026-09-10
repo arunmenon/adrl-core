@@ -22,6 +22,8 @@ jobs:
           uv sync --all-extras
       - name: Generate development keys (never committed)
         run: .venv/bin/python tools/gen_dev_keys.py
+      - name: Sign the endpoint inventory with the fresh development key
+        run: .venv/bin/adrl config sign-inventory --key config/keys/dev/manifest-signing.key
       - name: Ruff
         run: |
           .venv/bin/python -m ruff check src tests tools
