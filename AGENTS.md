@@ -79,3 +79,19 @@ implementation wave complete. Recheck after any source/evidence/review change. P
 historical grades and unrelated changes; this local gate does not replace runtime tests,
 human graduation, or remote CI/branch protection. Scope exclusions and unresolved historic
 register defects must be explicit. Routine documentation updates need no extra permission.
+
+## Review-ledger governance
+
+Use `adrl-review-ledger` at
+`/Users/arunmenon/projects/adrl-world-class/skills/adrl-review-ledger/SKILL.md` before
+publishing review records, reconciling findings or making a completion claim. The skill is
+installed for both Codex and Claude. Query applicable blockers; legacy coverage is unknown,
+and an implementer's deferral is not reviewer verification or an owner ruling.
+
+Preserve original findings and registered legacy folders. Append actor-labelled dispositions,
+new recheck artifacts and matching ledger events. Before a register commit run
+`python3 tools/review_ledger_guard.py check --staged` from the register. A local register hook
+runs this check; new clones need `python3 tools/review_ledger_guard.py install-hook`.
+For runtime work, review the sibling register's current blockers and complete taxonomy sync;
+the register hook does not validate runtime commits or grant completion authority. Never
+bypass or weaken the guard merely to make a commit succeed. Remote enforcement is not configured.

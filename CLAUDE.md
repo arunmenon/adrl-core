@@ -60,3 +60,7 @@ proposal that this repository implements is `../adrl-world-class/design/implemen
 
 All six must pass before a change is considered done. Use `uv sync --all-extras` to refresh the
 virtual environment; the lockfile is checked in and only binary wheels are used.
+
+## Shared current governance
+
+@AGENTS.md
