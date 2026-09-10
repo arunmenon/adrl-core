@@ -1,0 +1,63 @@
+name: runtime-checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  engineering-checks:
+    name: ruff, mypy, pytest, config and ledger discipline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - name: Sync environment (wheels only)
+        run: |
+          uv venv -p 3.12 .venv
+          uv sync --all-extras
+      - name: Generate development keys (never committed)
+        run: .venv/bin/python tools/gen_dev_keys.py
+      - name: Ruff
+        run: |
+          .venv/bin/python -m ruff check src tests tools
+          .venv/bin/python -m ruff format --check src tests tools
+      - name: Mypy strict
+        run: .venv/bin/python -m mypy
+      - name: Pytest
+        run: .venv/bin/python -m pytest -q
+      - name: Ledger discipline, learning contract, data inventory, config
+        run: |
+          .venv/bin/python tools/check_ledger_discipline.py
+          .venv/bin/python tools/check_learning_contract.py
+          .venv/bin/python tools/check_data_inventory.py
+          .venv/bin/python tools/check_config.py
+
+  register-blockers:
+    name: register review blockers for changed owners
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for register access token
+        id: token
+        env:
+          ADRL_REGISTER_TOKEN: ${{ secrets.ADRL_REGISTER_TOKEN }}
+        run: |
+          if [ -n "$ADRL_REGISTER_TOKEN" ]; then echo "present=true" >> "$GITHUB_OUTPUT"; else echo "present=false" >> "$GITHUB_OUTPUT"; echo "::warning::ADRL_REGISTER_TOKEN secret not set; register blocker check skipped (not enforced)"; fi
+      - uses: actions/checkout@v4
+        if: steps.token.outputs.present == 'true'
+        with:
+          repository: arunmenon/adrl-world-class
+          token: ${{ secrets.ADRL_REGISTER_TOKEN }}
+          path: register
+      - uses: actions/setup-python@v5
+        if: steps.token.outputs.present == 'true'
+        with:
+          python-version: "3.12"
+      - name: Completion check against the register ledger
+        if: steps.token.outputs.present == 'true'
+        run: python3 tools/check_completion.py --register register --base origin/main
