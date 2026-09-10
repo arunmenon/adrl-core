@@ -1,0 +1,51 @@
+# policy-v1. Every constant here is recorded on the decision rows it influences (ADRL-RTG-002/003/004/005).
+version: policy-v1
+tau_by_rung:
+  local: 0.80
+  cheap_cloud: 0.85
+  frontier: 0.50
+bands:
+  - band_id: clear-local
+    rung: local
+    rule_ids: [rule.mechanical_edit_small_file, rule.read_only_lookup]
+    description: mechanical, small-context, small-diff work with a verifier available
+  - band_id: clear-frontier
+    rung: frontier
+    rule_ids: [rule.destructive_first_action, rule.large_context, rule.multi_file_design]
+    description: destructive first actions, large contexts, or design work
+  - band_id: ambiguous
+    rung: null
+    rule_ids: []
+    description: everything no clear rule claims
+rule_precision_threshold: 0.85
+ambiguous_fallback_rung: frontier
+classifier_timeout_s: 2.0
+classifier_token_cap: 2000
+objective_version: objective-v1
+objective_weights:
+  verified_quality: 1.0
+  retry_risk: 0.5
+  latency: 0.2
+  session_cost: 0.3
+close_rule:
+  rule_id: close-v1
+  subsequent_turns: 3
+  idle_minutes: 30
+local_attempt_budget:
+  unit: tool_calls
+  limit: 12
+  wall_clock_cap_s: 600
+cascade_safety_margin_tokens: 4000
+gateway_retry_budget:
+  max_attempts_per_turn: 2
+  wall_clock_cap_s: 30
+retention_prompt_class_days: 90
+retention_skeleton_days: 730
+exploration_epsilon_by_rung: {}
+exploration_version: null
+latency_weight_by_mode:
+  interactive: 1.0
+  background_subagent: 0.05
+  utility: 0.2
+episode_length_estimator: constant-v1
+episode_length_constant: 12

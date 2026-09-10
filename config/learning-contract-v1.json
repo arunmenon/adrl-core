@@ -1,0 +1,32 @@
+{
+  "version": "learning-contract-v1",
+  "feature_schema_version": "features-v1",
+  "failure_types_version": "failure-types-v2",
+  "features": [
+    {"name": "request_class", "dtype": "str", "source": "wire"},
+    {"name": "context_tokens_est", "dtype": "int", "source": "feasibility"},
+    {"name": "tool_count", "dtype": "int", "source": "wire"},
+    {"name": "turn_index", "dtype": "int", "source": "state"},
+    {"name": "first_action_side_effect_class", "dtype": "str", "source": "features"},
+    {"name": "band_id", "dtype": "str", "source": "policy"},
+    {"name": "repo_class", "dtype": "str", "source": "gates"},
+    {"name": "embedding_missing", "dtype": "bool", "source": "retrieval"},
+    {"name": "neighbour_local_success_rate", "dtype": "float", "source": "projection_asof"}
+  ],
+  "deny_list": [
+    "served_rung", "served_model", "served_provider", "escalated", "escalation_events",
+    "outcome_state", "outcome_type", "verified_result", "verification_events",
+    "closed_turn_ts", "closed_final_ts", "session_turn_count_final"
+  ],
+  "forbidden_targets": ["served_rung", "decision", "decided_rung"],
+  "tier_rules": {
+    "T1": "verified pass/fail, task_capability, closed_final, organic, no tree drift, verifier precision above threshold",
+    "T2": "verified but closed_turn only",
+    "T3": "proxy success, organic",
+    "T4": "simulator or benchmark",
+    "T5": "counterfactual pairs",
+    "explore": "logged exploration with propensity"
+  },
+  "verifier_precision_threshold": 0.9,
+  "target_risk": 0.05
+}

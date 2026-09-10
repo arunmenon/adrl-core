@@ -1,0 +1,46 @@
+{
+  "identities": {
+    "continuation": {
+      "agent_chain": [],
+      "agent_id": null,
+      "ancestor_lineages": [],
+      "lineage_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "parent_agent_id": null,
+      "session_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "source": "header"
+    },
+    "count_tokens": {
+      "agent_chain": [],
+      "agent_id": null,
+      "ancestor_lineages": [],
+      "lineage_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "parent_agent_id": null,
+      "session_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "source": "header"
+    },
+    "fork_subagent": {
+      "agent_chain": [
+        "agent-fork-0001"
+      ],
+      "agent_id": "agent-fork-0001",
+      "ancestor_lineages": [
+        "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7"
+      ],
+      "lineage_hmac": "cc9ebc38da2bcc4fbee949aa823e0cfbb4c30b48fbc7f30c19c6a189a0680389",
+      "parent_agent_id": null,
+      "session_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "source": "header"
+    },
+    "user_turn": {
+      "agent_chain": [],
+      "agent_id": null,
+      "ancestor_lineages": [],
+      "lineage_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "parent_agent_id": null,
+      "session_hmac": "e4c2ae4e6108069c5c9a5ba50a98add30f515ff422b56da3537c6597fb3fabc7",
+      "source": "header"
+    }
+  },
+  "identity_source_sha256": "4fd900d3cec7195e024204f10dbf005c3ddf91963015576d8888c49ce21deee5",
+  "origin": "Unmodified implementation baseline; synthetic existing fixtures"
+}

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+data/
+*.db
+*.db-wal
+*.db-shm
+keystore/
+.env*
+dist/
+# private keys are generated locally by tools/gen_dev_keys.py; only .pub files are tracked
+config/keys/**/*.key
+config/keys/**/*.pem

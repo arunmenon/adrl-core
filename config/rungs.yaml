@@ -1,0 +1,45 @@
+# rung-membership-v1. Shared with the gateway config generator (ADRL-FND-002, ADRL-RTG-001).
+# ADRL never names a model in policy; it names LiteLLM model groups and rungs.
+version: rung-membership-v1
+cheap_cloud_admission_criterion: >
+  A model group enters cheap_cloud when it completes the local-rung task slice at non-inferior
+  verified quality to the local rung on the same counterfactual pairs, at list price at most
+  one fifth of the frontier group. Price alone never admits a group.
+compaction_window_tokens: 100000
+compaction_overhead_tokens: 8000
+gateway_served_model_header: x-litellm-model-id
+frontier_model_names:
+  - claude-fable-5-1
+  - claude-opus-5
+  - claude-sonnet-5
+  - claude-haiku-4-5-20251001
+rungs:
+  local:
+    members: [adrl-local, adrl-local-large]
+    intra_rung_escalation_order: [adrl-local, adrl-local-large]
+    tokenizer_ratio: 1.15
+    tokenizer_id: local-default
+    boundary:
+      context_ceiling: 131072
+      permitted_task_classes: [mechanical_edit, small_diff, small_context]
+      evidence_ref: null
+      evidence_date: null
+  cheap_cloud:
+    members: [adrl-cheap-cloud]
+    tokenizer_ratio: 1.0
+    boundary:
+      context_ceiling: 200000
+      permitted_task_classes: [mechanical_edit, small_diff, small_context, medium_diff]
+      evidence_ref: null
+      evidence_date: null
+  frontier:
+    members: [adrl-frontier]
+    tokenizer_ratio: 1.0
+    boundary:
+      context_ceiling: 1000000
+      permitted_task_classes: [any]
+      evidence_ref: null
+      evidence_date: null
+fallback_groups:
+  - primary: adrl-local
+    fallbacks: [adrl-local-large]

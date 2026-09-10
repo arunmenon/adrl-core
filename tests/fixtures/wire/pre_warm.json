@@ -1,0 +1,81 @@
+{
+  "method": "POST",
+  "path": "/v1/messages",
+  "headers": {
+    "content-type": "application/json",
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "interleaved-thinking-2025-05-14",
+    "x-claude-code-session-id": "sess-fixture-0001"
+  },
+  "body": {
+    "model": "claude-fable-5-1",
+    "max_tokens": 1,
+    "stream": false,
+    "system": [
+      {
+        "type": "text",
+        "text": "cc_entrypoint=cli\nYou are Claude Code, an assistant.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "Read",
+        "description": "Read a file",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "type": "string"
+            }
+          }
+        },
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "name": "Edit",
+        "description": "Edit a file",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "type": "string"
+            },
+            "old_string": {
+              "type": "string"
+            },
+            "new_string": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 3
+      }
+    ],
+    "thinking": {
+      "type": "adaptive"
+    },
+    "metadata": {
+      "user_id": "{\"device_id\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"account_uuid\": \"00000000-0000-0000-0000-00000000aaaa\", \"session_id\": \"11111111-1111-1111-1111-111111111111\"}"
+    },
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      }
+    ]
+  },
+  "expected": {
+    "request_class": "pre_warm",
+    "content_bearing": true,
+    "is_boundary": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_doc": "ADRL-CAS-003 golden: three parallel tool_use blocks; two results is not a boundary, three is.",
+  "model": "claude-fable-5-1",
+  "max_tokens": 64000,
+  "stream": true,
+  "system": "You are Claude Code.",
+  "tools": [
+    {"name": "Read", "description": "read a file", "input_schema": {"type": "object"}},
+    {"name": "Edit", "description": "edit a file", "input_schema": {"type": "object"}},
+    {"name": "Bash", "description": "run a command", "input_schema": {"type": "object"}}
+  ],
+  "messages": [
+    {"role": "user", "content": [{"type": "text", "text": "Fix the failing test in tests/test_api.py"}]},
+    {"role": "assistant", "content": [
+      {"type": "text", "text": "Reading the relevant files."},
+      {"type": "tool_use", "id": "toolu_01", "name": "Read", "input": {"file_path": "tests/test_api.py"}},
+      {"type": "tool_use", "id": "toolu_02", "name": "Read", "input": {"file_path": "src/api.py"}},
+      {"type": "tool_use", "id": "toolu_03", "name": "Bash", "input": {"command": "git status"}}
+    ]}
+  ],
+  "partial_results": [
+    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "def test_x(): assert api() == 1"},
+    {"type": "tool_result", "tool_use_id": "toolu_02", "content": "def api(): return 2"}
+  ],
+  "full_results": [
+    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "def test_x(): assert api() == 1"},
+    {"type": "tool_result", "tool_use_id": "toolu_02", "content": "def api(): return 2"},
+    {"type": "tool_result", "tool_use_id": "toolu_03", "content": "On branch main", "is_error": false}
+  ]
+}

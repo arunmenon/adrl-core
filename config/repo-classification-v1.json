@@ -1,0 +1,58 @@
+{
+  "version": "repo-classification-v1",
+  "owner": "security",
+  "default_class_id": "default",
+  "classes": [
+    {
+      "class_id": "default",
+      "allowed_rungs": [
+        "local",
+        "cheap_cloud"
+      ],
+      "residency": null,
+      "release_permitted": true,
+      "restricted": false
+    },
+    {
+      "class_id": "open",
+      "allowed_rungs": [
+        "local",
+        "cheap_cloud",
+        "frontier"
+      ],
+      "residency": null,
+      "release_permitted": true,
+      "restricted": false
+    },
+    {
+      "class_id": "residency-eu",
+      "residency": "eu",
+      "release_permitted": true,
+      "restricted": false
+    },
+    {
+      "class_id": "restricted",
+      "allowed_rungs": [
+        "local"
+      ],
+      "residency": null,
+      "release_permitted": false,
+      "restricted": true
+    }
+  ],
+  "repos": [
+    {
+      "repo_id": "adrl-core",
+      "match": "/Users/arunmenon/projects/adrl-core",
+      "class_id": "open",
+      "restricted_path_prefixes": []
+    },
+    {
+      "repo_id": "payments-core-example",
+      "match": "git@github.example.com:payments/core",
+      "class_id": "restricted",
+      "restricted_path_prefixes": []
+    }
+  ],
+  "unknown_identity_policy": "local_only"
+}

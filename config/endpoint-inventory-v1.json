@@ -1,0 +1,62 @@
+{
+  "version": "endpoint-inventory-v1",
+  "owner": "platform-security",
+  "frontier_aliases_to": "adrl-frontier",
+  "pinned_alias": "adrl-pinned-local",
+  "deployments": [
+    {
+      "id": "local-qwen-7b",
+      "model_group": "adrl-local",
+      "rung": "local",
+      "provider": "openai_compatible",
+      "model": "openai/qwen2.5-coder-7b-instruct",
+      "api_base": "http://127.0.0.1:8080/v1",
+      "api_key_env": "ADRL_LOCAL_API_KEY",
+      "trust_zone": "local_host",
+      "geo": "local",
+      "data_use_profile": "on_device",
+      "attested_by": "dev-inventory",
+      "max_input_tokens": 131072
+    },
+    {
+      "id": "local-qwen-32b",
+      "model_group": "adrl-local-large",
+      "rung": "local",
+      "provider": "openai_compatible",
+      "model": "openai/qwen2.5-coder-32b-instruct",
+      "api_base": "http://127.0.0.1:8081/v1",
+      "api_key_env": "ADRL_LOCAL_API_KEY",
+      "trust_zone": "local_host",
+      "geo": "local",
+      "data_use_profile": "on_device",
+      "attested_by": "dev-inventory",
+      "max_input_tokens": 131072
+    },
+    {
+      "id": "cheap-haiku-us",
+      "model_group": "adrl-cheap-cloud",
+      "rung": "cheap_cloud",
+      "provider": "anthropic",
+      "model": "anthropic/claude-haiku-4-5-20251001",
+      "api_base": "https://api.anthropic.com",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "trust_zone": "public_cloud",
+      "geo": "us",
+      "data_use_profile": "no_training_no_retention",
+      "attested_by": "dev-inventory"
+    },
+    {
+      "id": "frontier-fable-us",
+      "model_group": "adrl-frontier",
+      "rung": "frontier",
+      "provider": "anthropic",
+      "model": "anthropic/claude-fable-5-1",
+      "api_base": "https://api.anthropic.com",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "trust_zone": "public_cloud",
+      "geo": "us",
+      "data_use_profile": "no_training_no_retention",
+      "attested_by": "dev-inventory"
+    }
+  ]
+}

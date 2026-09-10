@@ -1,0 +1,95 @@
+# detectors-v1 (ADRL-SAF-003). Tier membership is decided by measured precision, never by tool
+# default. Precision figures here are PROVISIONAL until `adrl scan-measure` publishes results on a
+# representative corpus; re-run quarterly and bump the version when tiers move.
+version: detectors-v1
+measured_on: null
+generic_min_length: 16
+generic_min_entropy_bits: 3.5
+base64_min_length: 24
+detectors:
+  # first-party high-confidence formats
+  - detector_id: aws_access_key
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: private_key_block
+    tier: high_confidence
+    provisional_precision: 0.98
+  - detector_id: anthropic_api_key
+    tier: high_confidence
+    provisional_precision: 0.97
+  - detector_id: openai_api_key
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: github_token
+    tier: high_confidence
+    provisional_precision: 0.97
+  - detector_id: slack_token
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: stripe_live_key
+    tier: high_confidence
+    provisional_precision: 0.97
+  - detector_id: google_api_key
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: jwt
+    tier: generic
+    provisional_precision: 0.60
+  - detector_id: connection_string_cred
+    tier: generic
+    provisional_precision: 0.70
+  - detector_id: env_assignment
+    tier: generic
+    provisional_precision: 0.55
+  # detect-secrets plugins, keyed by plugin class name
+  - detector_id: ds:AWSKeyDetector
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: ds:PrivateKeyDetector
+    tier: high_confidence
+    provisional_precision: 0.98
+  - detector_id: ds:GitHubTokenDetector
+    tier: high_confidence
+    provisional_precision: 0.97
+  - detector_id: ds:GitLabTokenDetector
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: ds:SlackDetector
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: ds:StripeDetector
+    tier: high_confidence
+    provisional_precision: 0.97
+  - detector_id: ds:OpenAIDetector
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: ds:SendGridDetector
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: ds:TwilioKeyDetector
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: ds:NpmDetector
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: ds:PypiTokenDetector
+    tier: high_confidence
+    provisional_precision: 0.95
+  - detector_id: ds:AzureStorageKeyDetector
+    tier: high_confidence
+    provisional_precision: 0.90
+  - detector_id: ds:JwtTokenDetector
+    tier: generic
+    provisional_precision: 0.60
+  - detector_id: ds:KeywordDetector
+    tier: generic
+    provisional_precision: 0.45
+  - detector_id: ds:BasicAuthDetector
+    tier: generic
+    provisional_precision: 0.60
+  - detector_id: ds:Base64HighEntropyString
+    tier: generic
+    provisional_precision: 0.25
+  - detector_id: ds:HexHighEntropyString
+    tier: generic
+    provisional_precision: 0.25

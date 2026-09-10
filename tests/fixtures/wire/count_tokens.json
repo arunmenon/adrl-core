@@ -1,0 +1,78 @@
+{
+  "method": "POST",
+  "path": "/v1/messages/count_tokens",
+  "headers": {
+    "content-type": "application/json",
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "interleaved-thinking-2025-05-14",
+    "x-claude-code-session-id": "sess-fixture-0001"
+  },
+  "body": {
+    "model": "claude-fable-5-1",
+    "system": [
+      {
+        "type": "text",
+        "text": "cc_entrypoint=cli\nYou are Claude Code, an assistant.",
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      }
+    ],
+    "tools": [
+      {
+        "name": "Read",
+        "description": "Read a file",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "type": "string"
+            }
+          }
+        },
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "name": "Edit",
+        "description": "Edit a file",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "file_path": {
+              "type": "string"
+            },
+            "old_string": {
+              "type": "string"
+            },
+            "new_string": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 3
+      }
+    ],
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "fix the failing test in tests/test_math.py"
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "request_class": "passthrough",
+    "content_bearing": true,
+    "fingerprint_id": "count_tokens"
+  }
+}

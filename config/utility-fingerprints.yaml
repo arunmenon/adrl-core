@@ -1,0 +1,23 @@
+# utility-fingerprints-v1 (ADRL-SEM-004). Shape-based; never keyed on the requested model name.
+version: utility-fingerprints-v1
+pre_warm_max_tokens: 1
+fingerprints:
+  - fingerprint_id: title
+    kind: cosmetic
+    system_prefix_contains: ["5-10 word title"]
+    max_tokens_at_most: 64
+  - fingerprint_id: topic_detect
+    kind: cosmetic
+    system_prefix_contains: ["isNewTopic"]
+    max_tokens_at_most: 128
+  - fingerprint_id: command_suggestion
+    kind: cosmetic
+    system_prefix_contains: ["suggest", "command"]
+    max_tokens_at_most: 128
+  - fingerprint_id: compaction
+    kind: context_bearing
+    system_prefix_contains: ["summary of the conversation", "summarizing conversations", "summarize this conversation"]
+    max_tokens_at_most: null
+# Body fingerprint fallback for subagent lineage (ADRL-SEM-001 follow-up). Empty until a corpus
+# measurement supplies a stable shape; the header path is authoritative.
+subagent_system_contains: []

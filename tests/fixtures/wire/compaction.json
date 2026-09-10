@@ -1,0 +1,42 @@
+{
+  "method": "POST",
+  "path": "/v1/messages",
+  "headers": {
+    "content-type": "application/json",
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "interleaved-thinking-2025-05-14",
+    "x-claude-code-session-id": "sess-fixture-0001"
+  },
+  "body": {
+    "model": "claude-fable-5-1",
+    "max_tokens": 20000,
+    "metadata": {
+      "user_id": "{\"device_id\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"account_uuid\": \"00000000-0000-0000-0000-00000000aaaa\", \"session_id\": \"11111111-1111-1111-1111-111111111111\"}"
+    },
+    "system": "You are a helpful AI assistant tasked with summarizing conversations. Preserve every decision and constraint.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "fix the failing test"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I read the test and changed the assertion."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "Summarize this conversation so far for a fresh context window."
+      }
+    ]
+  },
+  "expected": {
+    "request_class": "utility",
+    "utility_kind": "context_bearing",
+    "fingerprint_id": "compaction"
+  }
+}

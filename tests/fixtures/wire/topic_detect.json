@@ -1,0 +1,29 @@
+{
+  "method": "POST",
+  "path": "/v1/messages",
+  "headers": {
+    "content-type": "application/json",
+    "anthropic-version": "2023-06-01",
+    "anthropic-beta": "interleaved-thinking-2025-05-14",
+    "x-claude-code-session-id": "sess-fixture-0001"
+  },
+  "body": {
+    "model": "claude-haiku-4-5-20251001",
+    "max_tokens": 128,
+    "metadata": {
+      "user_id": "{\"device_id\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"account_uuid\": \"00000000-0000-0000-0000-00000000aaaa\", \"session_id\": \"11111111-1111-1111-1111-111111111111\"}"
+    },
+    "system": "Analyze if this message indicates a new conversation topic. Respond with JSON: {\"isNewTopic\": boolean, \"title\": string}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "now let us look at the deploy script"
+      }
+    ]
+  },
+  "expected": {
+    "request_class": "utility",
+    "utility_kind": "cosmetic",
+    "fingerprint_id": "topic_detect"
+  }
+}

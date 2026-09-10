@@ -1,0 +1,21 @@
+# provider-pairs-v1 (ADRL-CAS-004). Keyed by source family, target family, thinking on target.
+version: provider-pairs-v1
+litellm_version_pin: "1.91"
+default_action: strip_and_disable
+rules:
+  - {source_family: anthropic, target_family: anthropic, thinking_enabled: true, action: keep_latest_thinking, note: latest assistant thinking blocks echoed unmodified}
+  - source_family: anthropic
+    target_family: anthropic
+    thinking_enabled: true
+    source_has_thinking: false
+    action: disable_thinking_for_handoff
+    note: "a source turn served without thinking blocks cannot be continued with thinking on; Anthropic rejects a tool_use-leading final assistant turn that lacks a thinking block, so the thinking parameter is dropped for the handoff request and every continuation of that turn and returns on the next user turn"
+  - {source_family: anthropic, target_family: anthropic, thinking_enabled: false, action: strip_and_disable}
+  - {source_family: anthropic, target_family: openai, thinking_enabled: true, action: strip_and_disable, map_tool_ids: true}
+  - {source_family: anthropic, target_family: openai, thinking_enabled: false, action: strip_and_disable, map_tool_ids: true}
+  - {source_family: openai, target_family: anthropic, thinking_enabled: true, action: strip_and_disable, map_tool_ids: true}
+  - {source_family: openai, target_family: anthropic, thinking_enabled: false, action: strip_and_disable, map_tool_ids: true}
+  - {source_family: local, target_family: anthropic, thinking_enabled: true, action: strip_and_disable}
+  - {source_family: local, target_family: anthropic, thinking_enabled: false, action: strip_and_disable}
+  - {source_family: local, target_family: openai, thinking_enabled: false, action: strip_and_disable, map_tool_ids: true}
+  - {source_family: anthropic, target_family: local, thinking_enabled: false, action: strip_and_disable}

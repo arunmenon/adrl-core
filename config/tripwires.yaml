@@ -1,0 +1,25 @@
+# tripwires-v1 (ADRL-CAS-001). Per-rung thresholds; tuning_run_id names the run that set them.
+version: tripwires-v1
+tuning_run_id: null
+by_rung:
+  local:
+    repeated_tool_calls: 3
+    invalid_tool_calls: 2
+    tool_error_repeats: 3
+    attempt_budget_exhausted: true
+    verifier_failure: true
+    long_running_allowance: 2
+  cheap_cloud:
+    repeated_tool_calls: 4
+    invalid_tool_calls: 2
+    tool_error_repeats: 4
+    attempt_budget_exhausted: true
+    verifier_failure: true
+    long_running_allowance: 2
+  frontier:
+    repeated_tool_calls: 6
+    invalid_tool_calls: 3
+    tool_error_repeats: 6
+    attempt_budget_exhausted: false
+    verifier_failure: true
+    long_running_allowance: 3

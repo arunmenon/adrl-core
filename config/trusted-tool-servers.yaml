@@ -1,0 +1,17 @@
+# Trusted tool servers (trusted-tool-servers-v1). Primary: ADRL-CAS-003.
+#
+# MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint) are hints from the
+# server and the MCP specification requires clients to treat them as untrusted unless the
+# server is trusted. ADRL honours a hint only when the tool's server name (the middle segment
+# of `mcp__<server>__<tool>`) is listed here. Every other MCP tool is classified from its name
+# alone, and an unknown tool is destructive.
+#
+# Harness built-in tools (Read, Edit, Bash, ...) are trusted for their NAMES only; a hint
+# attached to a built-in is ignored.
+version: trusted-tool-servers-v1
+servers: []
+# Example:
+# servers:
+#   - name: filesystem
+#     reason: first-party MCP server pinned by the platform team
+#     added: 2026-09-03

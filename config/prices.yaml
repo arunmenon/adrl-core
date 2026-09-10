@@ -1,0 +1,22 @@
+# prices-v1. USD per million tokens (ADRL-RTG-009). Local carries a latency-equivalent cost.
+version: prices-v1
+label: after_cache_effects
+by_rung:
+  local:
+    input: 0.05
+    output: 0.20
+    cache_write_multiplier: 1.0
+    cache_read_multiplier: 1.0
+    cache_ttl_s: 0
+  cheap_cloud:
+    input: 0.80
+    output: 4.00
+    cache_write_multiplier: 1.25
+    cache_read_multiplier: 0.10
+    cache_ttl_s: 300
+  frontier:
+    input: 15.00
+    output: 75.00
+    cache_write_multiplier: 1.25
+    cache_read_multiplier: 0.10
+    cache_ttl_s: 300

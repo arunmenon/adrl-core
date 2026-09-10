@@ -1,0 +1,23 @@
+{
+  "schema_version": "adrl-routing-lab-suite-v1",
+  "evidence_origin": "curated_synthetic",
+  "question": "Do actual decisions, context changes, cascade boundaries and restrictions remain visible through dispatch and receipts? No task-quality hypothesis is tested.",
+  "cases": [
+    {"id":"small-edit","family":"small edits","session":"edit","prompt":"Fix the typo in README.md"},
+    {"id":"bug-repair","family":"bug repairs","session":"bug","prompt":"Fix the parser bug that drops nested parentheses","stream":false},
+    {"id":"test-work","family":"test work","session":"tests","prompt":"Add tests for the parser edge cases in tests/test_parser.py"},
+    {"id":"refactor","family":"multi-file refactors","session":"refactor","prompt":"Refactor the whole payments module"},
+    {"id":"mixed-rename","family":"mixed intent","session":"mixed-rename","prompt":"Rename a variable and redesign the concurrency algorithm in worker.py"},
+    {"id":"mixed-explain","family":"mixed intent","session":"mixed-explain","prompt":"Explain the race condition and implement a fix in worker.py"},
+    {"id":"long-context","family":"long context and recovery","session":"long","prompt":"Fix the typo in README.md","context_chars":120000},
+    {"id":"loop-detected","family":"long context and recovery","session":"edit","prompt":"Fix the typo in README.md","tool_repeats":3},
+    {"id":"loop-escalated","family":"long context and recovery","session":"edit","prompt":"Fix the typo in README.md","tool_repeats":4},
+    {"id":"before-secret","family":"guardrail","session":"private","prompt":"Refactor the whole payments module"},
+    {"id":"secret-pin","family":"guardrail","session":"private","prompt":"Refactor the whole payments module","tool_repeats":1,"tool_result":"secret"},
+    {"id":"pin-persists","family":"guardrail","session":"private","prompt":"Refactor the whole payments module","tool_repeats":1},
+    {"id":"pinned-overflow","family":"guardrail","session":"private","prompt":"Refactor the whole payments module","tool_repeats":1,"tool_result":"oversize"},
+    {"id":"missing-identity","family":"receipt fault","session":"identity","prompt":"Fix the typo in README.md","endpoint":"missing_identity"},
+    {"id":"upstream-error","family":"transport fault","session":"error","prompt":"Refactor the whole payments module","endpoint":"error"},
+    {"id":"responses-unqualified","family":"unsupported profile","session":"responses","prompt":"Fix the typo in README.md","profile":"responses_unqualified"}
+  ]
+}
